@@ -81,7 +81,6 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	public function initializeObject() {
 		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
 		$this->damRepository = $objectManager->get('Tx_Cicbase_Domain_Repository_DigitalAssetRepository');
-		$this->setImages();
 	}
 
 	/**
@@ -147,7 +146,7 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return void
 	 */
 	public function setImages() {
-		$this->images = $this->damRepository->get('tx_cicslide_domain_model_slide',$this->uid,'images');;
+		$this->images = $this->damRepository->get('tx_cicslide_domain_model_slide',$this->uid,'images');
 	}
 
 	/**
@@ -156,7 +155,16 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return array Collection of DAM objects.
 	 */
 	public function getImages() {
+		$this->checkImages();
 		return $this->images;
+	}
+
+	/**
+	 * Make sure images are retrieved.
+	 * @return void
+	 */
+	public function checkImages() {
+		if(!$this->images) $this->setImages();
 	}
 
 	/**
@@ -165,6 +173,8 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return array Collection of DAM objects.
 	 */
 	public function getFirstImage() {
+		$this->checkImages();
+
 		if($this->images) {
 			$out = $this->images[0];
 		} else {
