@@ -1,0 +1,14 @@
+plugin.tx_cicslide {
+	view {
+		# cat=plugin.tx_cicslide/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:cicslide/Resources/Private/Templates/
+		# cat=plugin.tx_cicslide/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:cicslide/Resources/Private/Partials/
+		# cat=plugin.tx_cicslide/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:cicslide/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_cicslide//a; type=int+; label=Default storage PID
+		storagePid = 
+	}
+}

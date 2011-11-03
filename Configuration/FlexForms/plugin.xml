@@ -1,0 +1,43 @@
+<T3DataStructure>
+	<meta type="array">
+		<langChildren type="integer">0</langChildren>
+		<langDisable type="integer">1</langDisable>
+	</meta>
+	<ROOT>
+		<type>array</type>
+		<el>
+			<switchableControllerActions>
+				<TCEforms>
+					<label>Display Type</label>
+					<onChange>reload</onChange>
+					<config>
+						<type>select</type>
+						<items type="array">
+							<numIndex index="1" type="array">
+								<numIndex index="0">Default</numIndex>
+								<numIndex index="1">Slide->show</numIndex>
+							</numIndex>
+						</items>
+						<minitems>0</minitems>
+						<maxitems>1</maxitems>
+						<size>1</size>
+					</config>
+				</TCEforms>
+			</switchableControllerActions>
+			<settings.slides>
+				<TCEforms>
+					<label>Items</label>
+					<!--<displayCond>FIELD:switchableControllerActions:=:Slide->show,</displayCond>-->
+					<config>
+						<type>select</type>
+						<foreign_table>tx_cicslide_domain_model_slide</foreign_table>
+						<foreign_table_where>ORDER BY tx_cicslide_domain_model_slide.title</foreign_table_where>
+						<size>10</size>
+						<minitems>0</minitems>
+						<maxitems>100</maxitems>
+					</config>
+				</TCEforms>
+			</settings.slides>
+		</el>
+	</ROOT>
+</T3DataStructure>

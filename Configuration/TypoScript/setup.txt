@@ -1,0 +1,30 @@
+plugin.tx_cicslide {
+	view {
+		templateRootPath = {$plugin.tx_cicslide.view.templateRootPath}
+		partialRootPath = {$plugin.tx_cicslide.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_cicslide.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_cicslide.persistence.storagePid}
+	}
+}
+
+plugin.tx_cicslide._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-cicslide table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-cicslide table th {
+		font-weight:bold;
+	}
+
+	.tx-cicslide table td {
+		vertical-align:top;
+	}
+)
