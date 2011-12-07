@@ -150,7 +150,7 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * Getter for publications
+	 * Getter for images
 	 *
 	 * @return array Collection of DAM objects.
 	 */
@@ -168,13 +168,12 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * Getter for publications
+	 * Getter for first image
 	 *
-	 * @return array Collection of DAM objects.
+	 * @return array first DAM object
 	 */
 	public function getFirstImage() {
 		$this->checkImages();
-
 		if($this->images) {
 			$out = $this->images[0];
 		} else {
@@ -182,6 +181,5 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 		}
 		return $out;
 	}
-
 }
 ?>
