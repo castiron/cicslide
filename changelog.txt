@@ -1,0 +1,5 @@
+12/07/2011 Lucas Thurston <lucas@castironcoding.com>
+
+* Required cicbase 0.1.1
+
+* Plugin respects flexform slide selection

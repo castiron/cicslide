@@ -56,12 +56,11 @@
 	 * @return void
 	 */
 	public function showAction() {
-		
 		// Get the slide uids.
-		$slides = explode(',',$this->settings['slides']);
+		$slideUids = t3lib_div::trimExplode(',',$this->settings['slides']);
 
 		// Fetch from the repository.
-		$slides = $this->slideRepository->findAll();
+		$slides = $this->slideRepository->findByUids($slideUids);
 
 		// Send the slides to the view.
 		$this->view->assign('slides', $slides);
