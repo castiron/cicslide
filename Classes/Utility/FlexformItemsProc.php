@@ -1,0 +1,65 @@
+<?php
+
+/***************************************************************
+ *  Copyright notice
+ *  (c) 2011 Zach Davis <zach@castironcoding.com>, CIC
+ *  All rights reserved
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+/**
+ * @package cicslide
+ * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
+
+ */
+class Tx_Cicslide_Utiltiy_FlexformItemsProc {
+
+	public function processSlidesItemArray(&$params, $pObj) {
+
+		$languagePointer = 'lDEF';
+		$valuePointer = 'vDEF';
+		$items = $params['items'];
+
+		if(is_array($items) && count($items) > 0) {
+			$rawFlex = $params['row']['pi_flexform'];
+			$flexFormArray = t3lib_div::xml2array($rawFlex);
+			$slideTypeUid = $flexFormArray['data']['sDEF'][$languagePointer]['settings.slideType'][$valuePointer];
+
+			// get all item UIDs
+			$itemUids = array();
+			foreach($items as $item) {
+				$itemUids[$item[1]] = $item[1];
+			}
+
+			// get allowed slides based on type
+			$select = 'S.uid';
+			$table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = '.$GLOBALS['TYPO3_DB']->quoteStr($slideTypeUid, 'tx_cicslide_domain_model_slide');
+			$where = 'S.uid IN ('.implode(',',$itemUids).')';
+			$qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy, $limit);
+			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($qres)) {
+				$allowed[] = $row['uid'];
+			}
+
+			// reduce the items array
+			foreach($params['items'] as $k => $item) {
+				$itemUid = $item[1];
+				if(!in_array($itemUid,$allowed)) {
+					unset($params['items'][$k]);
+				}
+			}
+		}
+	}
+}
+
+?>

@@ -8,9 +8,13 @@
 		<languageKey index="default" type="array">
 			<label index="tx_cicslide_domain_model_slide">Slide</label>
 			<label index="tx_cicslide_domain_model_slide.title">Title</label>
+			<label index="tx_cicslide_domain_model_slide.slidetype">Type</label>
+			<label index="tx_cicslide_domain_model_slide.viewname">View Name</label>
 			<label index="tx_cicslide_domain_model_slide.description">Description</label>
 			<label index="tx_cicslide_domain_model_slide.link">Link</label>
 			<label index="tx_cicslide_domain_model_slide.images">Images</label>
+			<label index="tx_cicslide_domain_model_type">Type</label>
+
 		</languageKey>
 	</data>
 </T3locallang>

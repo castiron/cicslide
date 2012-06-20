@@ -3,13 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_cicslide_domain_model_slide'] = array(
-	'ctrl' => $TCA['tx_cicslide_domain_model_slide']['ctrl'],
+$TCA['tx_cicslide_domain_model_type'] = array(
+	'ctrl' => $TCA['tx_cicslide_domain_model_type']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, link, description, images',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, viewname',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, link, description, images,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, viewname, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -102,74 +102,15 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 				'eval' => 'trim'
 			),
 		),
-		'slidetype' => array(
+		'viewname' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.slidetype',
+			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.viewname',
 			'config' => array(
-				'type' => 'select',
-				'foreign_table' => 'tx_cicslide_domain_model_type',
-				'foreign_table_where' => 'ORDER BY tx_cicslide_domain_model_type.title',
-				'size' => 1,
-				'minitems' => 0,
-				'maxitems' => 1
-			)
-		),
-		'description' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.description',
-			'config' => array(
-				'type' => 'text',
-				'cols' => 40,
-				'rows' => 5,
+				'type' => 'input',
+				'size' => 30,
 				'eval' => 'trim'
 			),
 		),
-		'link' => array (
-			'exclude' => 0,
-			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.link',
-			'config' => array (
-				'type'     => 'input',
-				'size'     => '15',
-				'max'      => '255',
-				'checkbox' => '',
-				'eval'     => 'trim',
-				'wizards'  => array(
-					'_PADDING' => 2,
-					'link'     => array(
-						'type'         => 'popup',
-						'title'        => 'Link',
-						'icon'         => 'link_popup.gif',
-						'script'       => 'browse_links.php?mode=wizard',
-						'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1'
-					)
-				)
-			)
-		),
-		'images' => Array (
-			"exclude" => 0,
-			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.images',
-			"config" => Array (
-				'type' => 'group',
-				'form_type' => 'user',
-				'userFunc' => 'EXT:dam/lib/class.tx_dam_tcefunc.php:&tx_dam_tceFunc->getSingleField_typeMedia',
-				'internal_type' => 'db',
-				'allowed' => 'tx_dam',
-				'prepend_tname' => 1,
-				'MM' => 'tx_dam_mm_ref',
-				'MM_foreign_select' => 1,
-				'MM_opposite_field' => 'file_usage',
-				'MM_match_fields' => array(
-					'ident' => 'images'
-				),
-				'allowed_types' => 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai',
-				'max_size' => 10000,
-				'show_thumbs' => 1,
-				'size' => 6,
-				'maxitems' => 20,
-				'minitems' => 0,
-				'autoSizeMax' => 30
-			)
-		)
 	),
 );
 ?>

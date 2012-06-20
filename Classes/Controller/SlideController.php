@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2011 Michael McManus <michael@castironcoding.com>, CIC
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -40,6 +40,21 @@
 	protected $slideRepository;
 
 	/**
+	 * @var Tx_Cicslide_Domain_Repository_TypeRepository
+	 */
+	protected $slideTypeRepository;
+
+	/**
+	 * inject the slideTypeRepository
+	 *
+	 * @param Tx_Cicslide_Domain_Repository_TypeRepository slideTypeRepository
+	 * @return void
+	 */
+	public function injectSlideTypeRepository(Tx_Cicslide_Domain_Repository_TypeRepository $slideTypeRepository) {
+		$this->slideTypeRepository = $slideTypeRepository;
+	}
+
+	/**
 	 * Dependency injection of the Digital Asset Repository
 	 *
 	 * @param Tx_Cicslide_Domain_Repository_SlideRepository $slideRepository
@@ -50,12 +65,24 @@
 	}
 
 	/**
-	 * action show
-	 *
-	 * @param $slide
-	 * @return void
+	 * Shows the slideshow
 	 */
 	public function showAction() {
+
+		// if necessary, switch view based on slide type.
+		if($this->settings['slideType']) {
+			$slideType = $this->slideTypeRepository->findByUid($this->settings['slideType']);
+			if ($slideType->getViewname()) {
+				$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+				$path = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']).'/Slide/'.ucfirst($slideType->getViewname()).'.html';
+				if(file_exists($path)) {
+					$this->view->setTemplatePathAndFilename($path);
+				} else {
+					// TODO: Consider throwing an exception here. This would happen if a user set a view on a type but the file didn't exist.
+				}
+			}
+		}
+
 		// Get the slide uids.
 		$slideUids = t3lib_div::trimExplode(',',$this->settings['slides']);
 
@@ -64,6 +91,7 @@
 
 		// Send the slides to the view.
 		$this->view->assign('slides', $slides);
+
 	}
 }
 ?>

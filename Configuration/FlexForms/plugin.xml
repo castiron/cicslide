@@ -6,28 +6,30 @@
 	<ROOT>
 		<type>array</type>
 		<el>
-			<switchableControllerActions>
+			<settings.slideType>
 				<TCEforms>
-					<label>Display Type</label>
+					<label>Type</label>
 					<onChange>reload</onChange>
 					<config>
 						<type>select</type>
 						<items type="array">
 							<numIndex index="1" type="array">
-								<numIndex index="0">Default</numIndex>
-								<numIndex index="1">Slide->show</numIndex>
+								<numIndex index="0"></numIndex>
+								<numIndex index="1"></numIndex>
 							</numIndex>
 						</items>
+						<foreign_table>tx_cicslide_domain_model_type</foreign_table>
+						<foreign_table_where>ORDER BY tx_cicslide_domain_model_type.title</foreign_table_where>
+						<size>1</size>
 						<minitems>0</minitems>
 						<maxitems>1</maxitems>
-						<size>1</size>
 					</config>
 				</TCEforms>
-			</switchableControllerActions>
+			</settings.slideType>
 			<settings.slides>
 				<TCEforms>
 					<label>Items</label>
-					<!--<displayCond>FIELD:switchableControllerActions:=:Slide->show,</displayCond>-->
+					<displayCond>FIELD:settings.slideType:REQ:true</displayCond>
 					<config>
 						<type>select</type>
 						<foreign_table>tx_cicslide_domain_model_slide</foreign_table>
@@ -35,6 +37,7 @@
 						<size>10</size>
 						<minitems>0</minitems>
 						<maxitems>100</maxitems>
+						<itemsProcFunc>EXT:cicslide/Classes/Utility/FlexformItemsProc.php:Tx_Cicslide_Utiltiy_FlexformItemsProc->processSlidesItemArray</itemsProcFunc>
 					</config>
 				</TCEforms>
 			</settings.slides>
