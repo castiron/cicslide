@@ -150,20 +150,11 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.images',
 			"config" => Array (
 				'type' => 'group',
-				'form_type' => 'user',
-				'userFunc' => 'EXT:dam/lib/class.tx_dam_tcefunc.php:&tx_dam_tceFunc->getSingleField_typeMedia',
-				'internal_type' => 'db',
-				'allowed' => 'tx_dam',
-				'prepend_tname' => 1,
-				'MM' => 'tx_dam_mm_ref',
-				'MM_foreign_select' => 1,
-				'MM_opposite_field' => 'file_usage',
-				'MM_match_fields' => array(
-					'ident' => 'images'
-				),
-				'allowed_types' => 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai',
+				'uploadfolder' => 'uploads/tx_cicslide',
+				'show_thumbs' => true,
+				'internal_type' => 'file',
+				'allowed' => 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai',
 				'max_size' => 10000,
-				'show_thumbs' => 1,
 				'size' => 6,
 				'maxitems' => 20,
 				'minitems' => 0,
@@ -172,4 +163,28 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 		)
 	),
 );
+
+if (t3lib_extMgm::isLoaded('tx_dam')) {
+	$TCA['tx_cicslide_domain_model_slide']['columns']['images']['config'] = array(
+		'type' => 'group',
+		'form_type' => 'user',
+		'userFunc' => 'EXT:dam/lib/class.tx_dam_tcefunc.php:&tx_dam_tceFunc->getSingleField_typeMedia',
+		'internal_type' => 'db',
+		'allowed' => 'tx_dam',
+		'prepend_tname' => 1,
+		'MM' => 'tx_dam_mm_ref',
+		'MM_foreign_select' => 1,
+		'MM_opposite_field' => 'file_usage',
+		'MM_match_fields' => array(
+			'ident' => 'images'
+		),
+		'allowed_types' => 'gif,jpg,jpeg,tif,tiff,bmp,pcx,tga,png,pdf,ai',
+		'max_size' => 10000,
+		'show_thumbs' => 1,
+		'size' => 6,
+		'maxitems' => 20,
+		'minitems' => 0,
+		'autoSizeMax' => 30
+	);
+}
 ?>

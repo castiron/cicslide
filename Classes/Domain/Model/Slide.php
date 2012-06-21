@@ -4,7 +4,7 @@
  *  Copyright notice
  *
  *  (c) 2011 Michael McManus <michael@castironcoding.com>, CIC
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -61,26 +61,21 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	protected $link;
 
-
 	/**
 	 * Slide images
 	 *
-	 * @var array
+	 * @var string
 	 */
 	protected $images;
 
-	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-
-	}
+	protected $damIsEnabled = false;
 
 	public function initializeObject() {
-		$objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		$this->damRepository = $objectManager->get('Tx_Cicbase_Domain_Repository_DigitalAssetRepository');
+		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
+		if(t3lib_extMgm::isLoaded('tx_dam')) {
+			$this->damIsEnabled = true;
+			$this->damRepository = $this->objectManager->get('Tx_Cicbase_Domain_Repository_DigitalAssetRepository');
+		}
 	}
 
 	/**
@@ -145,8 +140,20 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 *
 	 * @return void
 	 */
-	public function setImages() {
-		$this->images = $this->damRepository->get('tx_cicslide_domain_model_slide',$this->uid,'images');
+	public function getDamImages() {
+		return $this->damRepository->get('tx_cicslide_domain_model_slide', $this->uid, 'images');
+	}
+
+	public function getUploadsImages() {
+		$imagePaths = explode(',',$this->images);
+		$out = array();
+		foreach($imagePaths as $path) {
+			$o = $this->objectManager->create('Tx_Cicbase_Domain_Model_DigitalAsset');
+			$o->setFileName($path);
+			$o->setFilePath('uploads/tx_cicslide/');
+			$out[] = $o;
+		}
+		return $out;
 	}
 
 	/**
@@ -155,16 +162,11 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return array Collection of DAM objects.
 	 */
 	public function getImages() {
-		$this->checkImages();
-		return $this->images;
-	}
-
-	/**
-	 * Make sure images are retrieved.
-	 * @return void
-	 */
-	public function checkImages() {
-		if(!$this->images) $this->setImages();
+		if ($this->damIsEnabled) {
+			return $this->getDamImages();
+		} else {
+			return $this->getUploadsImages();
+		}
 	}
 
 	/**
@@ -173,9 +175,9 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return array first DAM object
 	 */
 	public function getFirstImage() {
-		$this->checkImages();
-		if($this->images) {
-			$out = $this->images[0];
+		$images = $this->getImages();
+		if(is_array($images)) {
+			$out = $images[0];
 		} else {
 			$out = null;
 		}
