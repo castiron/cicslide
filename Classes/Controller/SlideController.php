@@ -68,7 +68,6 @@
 	 * Shows the slideshow
 	 */
 	public function showAction() {
-
 		// if necessary, switch view based on slide type.
 		if($this->settings['slideType']) {
 			$slideType = $this->slideTypeRepository->findByUid($this->settings['slideType']);
@@ -89,9 +88,51 @@
 		// Fetch from the repository.
 		$slides = $this->slideRepository->findByUids($slideUids);
 
+		// Randomize now if appropriate.  Doing this here allows for chunked randomization
+		if($this->settings['randomize']) {
+			$slides = $this->randomizeSlides(
+				$slides,
+				$this->settings['randomizeBatchSize'] ? $this->settings['randomizeBatchSize'] : 1
+			);
+		}
+
 		// Send the slides to the view.
 		$this->view->assign('slides', $slides);
+	}
 
+	/**
+	 * Randomizes slide order, preserving existing
+	 * ordering within chunks of $batchSize
+	 *
+	 * @param $slides
+	 * @param $batchSize
+	 * @return array
+	 */
+	protected function randomizeSlides($slides,$batchSize) {
+		$sortedSlides = array();
+		$batches = array();
+		$i = 1;
+		$j = 0;
+
+		// Get the slides into batches
+		foreach($slides as $slide) {
+			$batches[$j][] = $slide;
+			if(!($i % $batchSize)) {
+				$j++;
+			}
+			$i++;
+		}
+
+		// Shuffle the set of batches
+		shuffle($batches);
+
+		// Return the shuffled set of slides
+		foreach($batches as $batch) {
+			foreach($batch as $slide) {
+				$sortedSlides[] = $slide;
+			}
+		}
+		return $sortedSlides;
 	}
 }
 ?>

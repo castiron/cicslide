@@ -41,6 +41,24 @@
 					</config>
 				</TCEforms>
 			</settings.slides>
+			<settings.randomize>
+				<TCEforms>
+					<label>Randomize slide order</label>
+					<config>
+						<type>check</type>
+					</config>
+				</TCEforms>
+			</settings.randomize>
+			<settings.randomizeBatchSize>
+				<TCEforms>
+					<label>Randomize in chunks of this size</label>
+					<config>
+						<type>input</type>
+						<size>4</size>
+						<default>1</default>
+					</config>
+				</TCEforms>
+			</settings.randomizeBatchSize>
 		</el>
 	</ROOT>
 </T3DataStructure>
