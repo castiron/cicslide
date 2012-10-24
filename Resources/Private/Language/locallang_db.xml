@@ -13,8 +13,8 @@
 			<label index="tx_cicslide_domain_model_slide.description">Description</label>
 			<label index="tx_cicslide_domain_model_slide.link">Link</label>
 			<label index="tx_cicslide_domain_model_slide.images">Images</label>
+			<label index="tx_cicslide_domain_model_slide.html">Custom HTML for this slide (eg, embedded video snippet)</label>
 			<label index="tx_cicslide_domain_model_type">Type</label>
-
 		</languageKey>
 	</data>
 </T3locallang>

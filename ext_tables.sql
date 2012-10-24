@@ -11,6 +11,7 @@ CREATE TABLE tx_cicslide_domain_model_slide (
 	description text NOT NULL,
 	link text NOT NULL,
 	images varchar(255) DEFAULT '' NOT NULL,
+	html text,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

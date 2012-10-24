@@ -68,6 +68,13 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	protected $images;
 
+	/**
+	 * HTML
+	 *
+	 * @var string
+	 */
+	protected $html;
+
 	protected $damIsEnabled = false;
 
 	public function initializeObject() {
@@ -182,6 +189,25 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 			$out = null;
 		}
 		return $out;
+	}
+
+	/**
+	 * Returns the link
+	 *
+	 * @return string $html
+	 */
+	public function getHtml() {
+		return $this->html;
+	}
+
+	/**
+	 * Sets the html
+	 *
+	 * @param string $html
+	 * @return void
+	 */
+	public function setHtml($html) {
+		$this->html = $html;
 	}
 }
 ?>

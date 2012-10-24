@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_cicslide_domain_model_slide'] = array(
 	'ctrl' => $TCA['tx_cicslide_domain_model_slide']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, link, description, images',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, link, description, images, html',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, link, description, images,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, link, description, images,html,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -159,6 +159,14 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 				'maxitems' => 20,
 				'minitems' => 0,
 				'autoSizeMax' => 30
+			)
+		),
+		'html' => array(
+			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.html',
+			'config' => array(
+				'type' => 'text',
+				'cols' => 30,
+				'rows' => 5,
 			)
 		)
 	),
