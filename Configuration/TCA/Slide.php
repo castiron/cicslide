@@ -172,7 +172,7 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 	),
 );
 
-if (t3lib_extMgm::isLoaded('tx_dam')) {
+if (t3lib_extMgm::isLoaded('dam')) {
 	$TCA['tx_cicslide_domain_model_slide']['columns']['images']['config'] = array(
 		'type' => 'group',
 		'form_type' => 'user',

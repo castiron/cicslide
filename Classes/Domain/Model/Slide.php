@@ -79,7 +79,7 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 
 	public function initializeObject() {
 		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		if(t3lib_extMgm::isLoaded('tx_dam')) {
+		if(t3lib_extMgm::isLoaded('dam')) {
 			$this->damIsEnabled = true;
 			$this->damRepository = $this->objectManager->get('Tx_Cicbase_Domain_Repository_DigitalAssetRepository');
 		}
