@@ -23,7 +23,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
 
  */
-class Tx_Cicslide_Utiltiy_FlexformItemsProc {
+class Tx_Cicslide_Utility_FlexformItemsProc {
 
 	public function processSlidesItemArray(&$params, $pObj) {
 
@@ -45,8 +45,9 @@ class Tx_Cicslide_Utiltiy_FlexformItemsProc {
 			// get allowed slides based on type
 			$select = 'S.uid';
 			$table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = '.$GLOBALS['TYPO3_DB']->quoteStr($slideTypeUid, 'tx_cicslide_domain_model_slide');
-			$where = 'S.uid IN ('.implode(',',$itemUids).')';
-			$qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy, $limit);
+			$where = 'S.hidden=0 AND S.deleted=0 AND S.uid IN ('.implode(',',$itemUids).') ' .
+				'OR (S.t3ver_oid IN ('.implode(',',$itemUids).') AND S.t3ver_wsid='.$GLOBALS['BE_USER']->workspace.')';
+			$qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($qres)) {
 				$allowed[] = $row['uid'];
 			}
