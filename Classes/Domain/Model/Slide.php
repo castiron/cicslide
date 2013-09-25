@@ -75,6 +75,13 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	protected $html;
 
+	/**
+	 * Class name
+	 *
+	 * @var string
+	 */
+	protected $addclass;
+
 	protected $damIsEnabled = false;
 
 	public function initializeObject() {
@@ -208,6 +215,26 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setHtml($html) {
 		$this->html = $html;
+	}
+
+
+	/**
+	 * Returns the addclass
+	 *
+	 * @return string $addclass
+	 */
+	public function getAddclass() {
+		return $this->addclass;
+	}
+
+	/**
+	 * Sets the addclass
+	 *
+	 * @param string $addclass
+	 * @return void
+	 */
+	public function setAddclass($addclass) {
+		$this->addclass = $addclass;
 	}
 }
 ?>
