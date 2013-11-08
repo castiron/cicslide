@@ -9,16 +9,27 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 	'CIC Slide'
 );
 
+Tx_Extbase_Utility_Extension::registerPlugin(
+	$_EXTKEY,
+	'SlideUncached',
+	'CIC Slide: Uncached'
+);
+
+
 /********************************************************************************************
  *	PLUGIN FLEXFORM CONF
  *******************************************************************************************/
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
-$pluginSignature = strtolower($extensionName) . '_slide';
 
+$pluginSignature = strtolower($extensionName) . '_slide';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,recursive';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
 
+$pluginSignature = strtolower($extensionName) . '_slideuncached';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,recursive';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
 
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'CIC Slide');

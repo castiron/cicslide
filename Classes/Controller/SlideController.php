@@ -96,8 +96,23 @@
 			);
 		}
 
+		// Dealing with limits after the fact rather than in the query so we can use the randomize functionality
+		// above
+		if($this->settings['limit']) {
+			$limit = (int) $this->settings['limit'];
+ 			if(count($slides) > $limit) {
+				$i = 1;
+				foreach($slides as $slide) {
+					$limitedSlides[] = $slide;
+					if($i++ >= $limit) break;
+				}
+				$slides = $limitedSlides;
+			}
+		}
+
 		// Send the slides to the view.
 		$this->view->assign('slides', $slides);
+		$this->view->assign('time', time());
 	}
 
 	/**
