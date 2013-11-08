@@ -17,4 +17,18 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	)
 );
 
+Tx_Extbase_Utility_Extension::configurePlugin(
+	$_EXTKEY,
+	'SlideUncached',
+	array(
+		'Slide' => 'show',
+
+	),
+	// non-cacheable actions
+	array(
+		'Slide' => 'show',
+	)
+);
+
+
 ?>
