@@ -8,13 +8,14 @@
 		<languageKey index="default" type="array">
 			<label index="tx_cicslide_domain_model_slide">Slide</label>
 			<label index="tx_cicslide_domain_model_slide.title">Title</label>
+			<label index="tx_cicslide_domain_model_slide.isLightbox">Open in Lightbox</label>
 			<label index="tx_cicslide_domain_model_slide.slidetype">Type</label>
 			<label index="tx_cicslide_domain_model_slide.viewname">View Name</label>
 			<label index="tx_cicslide_domain_model_slide.description">Description</label>
-			<label index="tx_cicslide_domain_model_slide.addclass">Additional CSS class or classes to put on this slide (do not include quotes, or other HTML characters; do use spaces to separate)</label>
+			<label index="tx_cicslide_domain_model_slide.addclass">Additional CSS classes</label>
 			<label index="tx_cicslide_domain_model_slide.link">Link</label>
 			<label index="tx_cicslide_domain_model_slide.images">Images</label>
-			<label index="tx_cicslide_domain_model_slide.html">Custom HTML for this slide (eg, embedded video snippet)</label>
+			<label index="tx_cicslide_domain_model_slide.html">Insert custom HTML With Slide</label>
 			<label index="tx_cicslide_domain_model_type">Type</label>
 		</languageKey>
 	</data>

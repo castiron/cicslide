@@ -62,6 +62,13 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $link;
 
 	/**
+	 * Slide should open in a lightbox
+	 *
+	 * @var bool
+	 */
+	protected $isLightbox;
+
+	/**
 	 * Slide images
 	 *
 	 * @var string
@@ -147,6 +154,20 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setLink($link) {
 		$this->link = $link;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getIsLightbox() {
+		return $this->isLightbox;
+	}
+
+	/**
+	 * @param $isLightbox
+	 */
+	public function setIsLightbox($isLightbox) {
+		$this->isLightbox = $isLightbox;
 	}
 
 	/**
