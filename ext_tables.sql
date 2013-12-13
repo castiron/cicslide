@@ -11,6 +11,8 @@ CREATE TABLE tx_cicslide_domain_model_slide (
 	description text NOT NULL,
 	link text NOT NULL,
 	is_lightbox tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	lightbox_width varchar(4) DEFAULT '' NOT NULL,
+	lightbox_height varchar(4) DEFAULT '' NOT NULL,
 	images varchar(255) DEFAULT '' NOT NULL,
 	html text,
 	addclass varchar(255) DEFAULT '' NOT NULL,

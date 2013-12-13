@@ -9,7 +9,7 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, is_lightbox, link, description, class, images, html',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, is_lightbox, link, description, addclass, images,html,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, is_lightbox, lightbox_width, lightbox_height, link, description, addclass, images,html,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -106,7 +106,28 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.isLightbox',
 			'config' => array(
+				'onChange' => 'reload',
 				'type' => 'check',
+			),
+		),
+		'lightbox_width' => array(
+			'displayCond' => 'FIELD:is_lightbox:>:0',
+			'exclude' => 0,
+			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.lightbox_width',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'trim'
+			),
+		),
+		'lightbox_height' => array(
+			'displayCond' => 'FIELD:is_lightbox:>:0',
+			'exclude' => 0,
+			'label' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide.lightbox_height',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'trim'
 			),
 		),
 		'slidetype' => array(
@@ -187,6 +208,8 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 		)
 	),
 );
+
+$TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] = $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] ? $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] . ', is_lightbox' : 'is_lightbox';
 
 if (t3lib_extMgm::isLoaded('dam')) {
 	$TCA['tx_cicslide_domain_model_slide']['columns']['images']['config'] = array(

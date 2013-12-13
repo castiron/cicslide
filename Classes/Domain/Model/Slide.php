@@ -83,6 +83,16 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $html;
 
 	/**
+	 * @var string
+	 */
+	protected $lightboxWidth;
+
+	/**
+	 * @var string
+	 */
+	protected $lightboxHeight;
+
+	/**
 	 * Class name
 	 *
 	 * @var string
@@ -168,6 +178,50 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 */
 	public function setIsLightbox($isLightbox) {
 		$this->isLightbox = $isLightbox;
+	}
+
+	/**
+	 * @param $lightboxHeight
+	 */
+	public function setLightboxHeight($lightboxHeight) {
+		$this->lightboxHeight = $lightboxHeight;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLightboxHeight() {
+		return $this->lightboxHeight;
+	}
+
+	/**
+	 * @param $lightboxWidth
+	 */
+	public function setLightboxWidth($lightboxWidth) {
+		$this->lightboxWidth = $lightboxWidth;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLightboxWidth() {
+		return $this->lightboxWidth;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCustomLightboxSizeAttributes() {
+		$out = '';
+		if($this->isLightbox) {
+			if ($this->lightboxWidth) {
+				$out .= ' data-width="'.$this->lightboxWidth.'"';
+			}
+			if ($this->lightboxHeight) {
+				$out .= ' data-height="'.$this->lightboxHeight.'"';
+			}
+		}
+		return $out;
 	}
 
 	/**

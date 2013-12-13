@@ -9,6 +9,8 @@
 			<label index="tx_cicslide_domain_model_slide">Slide</label>
 			<label index="tx_cicslide_domain_model_slide.title">Title</label>
 			<label index="tx_cicslide_domain_model_slide.isLightbox">Open in Lightbox</label>
+			<label index="tx_cicslide_domain_model_slide.lightbox_width">Lightbox Width</label>
+			<label index="tx_cicslide_domain_model_slide.lightbox_height">Lightbox Height</label>
 			<label index="tx_cicslide_domain_model_slide.slidetype">Type</label>
 			<label index="tx_cicslide_domain_model_slide.viewname">View Name</label>
 			<label index="tx_cicslide_domain_model_slide.description">Description</label>
