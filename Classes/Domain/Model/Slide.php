@@ -230,7 +230,7 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @return void
 	 */
 	public function getDamImages() {
-		return $this->damRepository->get('tx_cicslide_domain_model_slide', $this->uid, 'images');
+		return $this->damRepository->get('tx_cicslide_domain_model_slide', $this->_localizedUid, 'images');
 	}
 
 	public function getUploadsImages() {
