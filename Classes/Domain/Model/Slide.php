@@ -1,5 +1,7 @@
 <?php
 
+namespace CIC\Cicslide\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,11 +34,11 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  *
  */
-class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEntity {
+class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * The DAM Repository
-	 * @var Tx_Cicservices_Domain_Repository_DigitalAssetRepository
+	 * @var \CIC\Cicbase\Domain\Repository\DigitalAssetRepository
 	 */
 	protected $damRepository;
 
@@ -102,10 +104,10 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 	protected $damIsEnabled = false;
 
 	public function initializeObject() {
-		$this->objectManager = t3lib_div::makeInstance('Tx_Extbase_Object_ObjectManager');
-		if(t3lib_extMgm::isLoaded('dam')) {
+		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+		if(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('dam')) {
 			$this->damIsEnabled = true;
-			$this->damRepository = $this->objectManager->get('Tx_Cicbase_Domain_Repository_DigitalAssetRepository');
+			$this->damRepository = $this->objectManager->get('CIC\Cicbase\Domain\Repository\DigitalAssetRepository');
 		}
 	}
 
@@ -237,7 +239,7 @@ class Tx_Cicslide_Domain_Model_Slide extends Tx_Extbase_DomainObject_AbstractEnt
 		$imagePaths = explode(',',$this->images);
 		$out = array();
 		foreach($imagePaths as $path) {
-			$o = $this->objectManager->create('Tx_Cicbase_Domain_Model_DigitalAsset');
+			$o = $this->objectManager->create('CIC\Cicbase\Domain\Model\DigitalAsset');
 			$o->setFileName($path);
 			$o->setFilePath('uploads/tx_cicslide/');
 			$out[] = $o;

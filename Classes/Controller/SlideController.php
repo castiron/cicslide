@@ -1,5 +1,7 @@
 <?php
 
+namespace CIC\Cicslide\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -32,35 +34,35 @@
 	 * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
 	 *
 	 */
-	class Tx_Cicslide_Controller_SlideController extends Tx_Extbase_MVC_Controller_ActionController {
+	class SlideController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * @var Tx_Cicslide_Domain_Repository_SlideRepository
+	 * @var \CIC\Cicslide\Domain\Repository\SlideRepository
 	 */
 	protected $slideRepository;
 
 	/**
-	 * @var Tx_Cicslide_Domain_Repository_TypeRepository
+	 * @var \CIC\Cicslide\Domain\Repository\TypeRepository
 	 */
 	protected $slideTypeRepository;
 
 	/**
 	 * inject the slideTypeRepository
 	 *
-	 * @param Tx_Cicslide_Domain_Repository_TypeRepository slideTypeRepository
+	 * @param \CIC\Cicslide\Domain\Repository\TypeRepository slideTypeRepository
 	 * @return void
 	 */
-	public function injectSlideTypeRepository(Tx_Cicslide_Domain_Repository_TypeRepository $slideTypeRepository) {
+	public function injectSlideTypeRepository(\CIC\Cicslide\Domain\Repository\TypeRepository $slideTypeRepository) {
 		$this->slideTypeRepository = $slideTypeRepository;
 	}
 
 	/**
 	 * Dependency injection of the Digital Asset Repository
 	 *
-	 * @param Tx_Cicslide_Domain_Repository_SlideRepository $slideRepository
+	 * @param \CIC\Cicslide\Domain\Repository\SlideRepository $slideRepository
 	 * @return void
 	 */
-	public function injectSlideRepository(Tx_Cicslide_Domain_Repository_SlideRepository $slideRepository) {
+	public function injectSlideRepository(\CIC\Cicslide\Domain\Repository\SlideRepository $slideRepository) {
 		$this->slideRepository = $slideRepository;
 	}
 
@@ -72,8 +74,8 @@
 		if($this->settings['slideType']) {
 			$slideType = $this->slideTypeRepository->findByUid($this->settings['slideType']);
 			if ($slideType->getViewname()) {
-				$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(Tx_Extbase_Configuration_ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-				$path = t3lib_div::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']).'/Slide/'.ucfirst($slideType->getViewname()).'.html';
+				$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
+				$path = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']).'/Slide/'.ucfirst($slideType->getViewname()).'.html';
 				if(file_exists($path)) {
 					$this->view->setTemplatePathAndFilename($path);
 				} else {
@@ -83,7 +85,7 @@
 		}
 
 		// Get the slide uids.
-		$slideUids = t3lib_div::trimExplode(',',$this->settings['slides']);
+		$slideUids = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',',$this->settings['slides']);
 
 		// Fetch from the repository.
 		$slides = $this->slideRepository->findByUids($slideUids);

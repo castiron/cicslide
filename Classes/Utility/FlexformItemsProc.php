@@ -1,5 +1,7 @@
 <?php
 
+namespace CIC\Cicslide\Utility;
+
 /***************************************************************
  *  Copyright notice
  *  (c) 2011 Zach Davis <zach@castironcoding.com>, CIC
@@ -23,7 +25,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
 
  */
-class Tx_Cicslide_Utility_FlexformItemsProc {
+class FlexformItemsProc {
 
 	public function processSlidesItemArray(&$params, $pObj) {
 
@@ -33,7 +35,7 @@ class Tx_Cicslide_Utility_FlexformItemsProc {
 
 		if(is_array($items) && count($items) > 0) {
 			$rawFlex = $params['row']['pi_flexform'];
-			$flexFormArray = t3lib_div::xml2array($rawFlex);
+			$flexFormArray = \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array($rawFlex);
 			$slideTypeUid = $flexFormArray['data']['sDEF'][$languagePointer]['settings.slideType'][$valuePointer];
 
 			// get all item UIDs

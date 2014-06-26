@@ -1,5 +1,7 @@
 <?php
 
+namespace CIC\Cicslide\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *  (c) 2011 Michael McManus <michael@castironcoding.com>, CIC
@@ -23,7 +25,7 @@
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
 
  */
-class Tx_Cicslide_Domain_Model_Type extends Tx_Extbase_DomainObject_AbstractEntity {
+class Type extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * @var string

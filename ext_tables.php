@@ -3,13 +3,13 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'Slide',
 	'CIC Slide'
 );
 
-Tx_Extbase_Utility_Extension::registerPlugin(
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'SlideUncached',
 	'CIC Slide: Uncached'
@@ -19,23 +19,23 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 /********************************************************************************************
  *	PLUGIN FLEXFORM CONF
  *******************************************************************************************/
-$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$extensionName = \TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY);
 
 $pluginSignature = strtolower($extensionName) . '_slide';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,recursive';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
 
 $pluginSignature = strtolower($extensionName) . '_slideuncached';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist'][$pluginSignature] = 'layout,select_key,recursive';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/plugin.xml');
 
 
-t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'CIC Slide');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'CIC Slide');
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_cicslide_domain_model_slide', 'EXT:cicslide/Resources/Private/Language/locallang_csh_tx_cicslide_domain_model_slide.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_cicslide_domain_model_slide');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_cicslide_domain_model_slide', 'EXT:cicslide/Resources/Private/Language/locallang_csh_tx_cicslide_domain_model_slide.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_cicslide_domain_model_slide');
 $TCA['tx_cicslide_domain_model_slide'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide',
@@ -56,13 +56,13 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Slide.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Slide.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
 	),
 );
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_cicslide_domain_model_type', 'EXT:cicslide/Resources/Private/Language/locallang_csh_tx_cicslide_domain_model_type.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_cicslide_domain_model_type');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_cicslide_domain_model_type', 'EXT:cicslide/Resources/Private/Language/locallang_csh_tx_cicslide_domain_model_type.xml');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_cicslide_domain_model_type');
 $TCA['tx_cicslide_domain_model_type'] = array(
 	'ctrl' => array(
 		'title' => 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_type',
@@ -83,8 +83,8 @@ $TCA['tx_cicslide_domain_model_type'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Type.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_type.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Type.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_type.gif'
 	),
 );
 
