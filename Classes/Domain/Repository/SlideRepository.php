@@ -1,9 +1,11 @@
 <?php
 
-class Tx_Cicslide_Domain_Repository_SlideRepository extends Tx_Cicbase_Persistence_Repository {
+namespace CIC\Cicslide\Domain\Repository;
+
+class SlideRepository extends \CIC\Cicbase\Persistence\Repository {
 	/**
 	 * @param $uids a string
-	 * @return Tx_Extbase_Persistence_ObjectStorage result
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage result
 	 */
 	public function findByUids($uids) {
 		$query = $this->createQuery();

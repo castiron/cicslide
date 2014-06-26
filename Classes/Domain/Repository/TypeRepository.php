@@ -1,6 +1,8 @@
 <?php
 
-class Tx_Cicslide_Domain_Repository_TypeRepository extends Tx_Cicbase_Persistence_Repository {
+namespace CIC\Cicslide\Domain\Repository;
+
+class TypeRepository extends \CIC\Cicbase\Persistence\Repository {
 
 }
 
