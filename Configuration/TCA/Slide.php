@@ -209,7 +209,6 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 	),
 );
 
-<<<<<<< HEAD
 $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] = $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] ? $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] . ', is_lightbox' : 'is_lightbox';
 
 if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('dam')) {
