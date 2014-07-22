@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	$_EXTKEY,
+	'CIC.'.$_EXTKEY,
 	'Slide',
 	array(
 		'Slide' => 'show',
