@@ -8,7 +8,10 @@ plugin.tx_cicslide {
 		layoutRootPath = EXT:cicslide/Resources/Private/Layouts/
 	}
 	persistence {
+		storagePid =
+	}
+	settings {
 		# cat=plugin.tx_cicslide//a; type=int+; label=Default storage PID
-		storagePid = 
+		respectSysLanguage = 1
 	}
 }

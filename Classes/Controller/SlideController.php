@@ -86,7 +86,7 @@
 		$slideUids = t3lib_div::trimExplode(',',$this->settings['slides']);
 
 		// Fetch from the repository.
-		$slides = $this->slideRepository->findByUids($slideUids);
+		$slides = $this->slideRepository->findByUids($slideUids, $this->settings['respectSysLanguage']);
 
 		// Randomize now if appropriate.  Doing this here allows for chunked randomization
 		if($this->settings['randomize']) {
