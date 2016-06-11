@@ -25,6 +25,7 @@ namespace CIC\Cicslide\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 
 /**
@@ -35,6 +36,11 @@ namespace CIC\Cicslide\Domain\Model;
  *
  */
 class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+
+    /**
+     * @var ObjectManager
+     */
+    var $objectManager;
 
 	/**
 	 * The DAM Repository
@@ -239,7 +245,7 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$imagePaths = explode(',',$this->images);
 		$out = array();
 		foreach($imagePaths as $path) {
-			$o = $this->objectManager->create('CIC\Cicbase\Domain\Model\DigitalAsset');
+			$o = $this->objectManager->get('CIC\Cicbase\Domain\Model\DigitalAsset');
 			$o->setFileName($path);
 			$o->setFilePath('uploads/tx_cicslide/');
 			$out[] = $o;
