@@ -27,29 +27,26 @@ namespace CIC\Cicslide\Utility;
  */
 class FlexformItemsProc {
 
+    /**
+     * @param $params
+     * @param $pObj
+     */
 	public function processSlidesItemArray(&$params, $pObj) {
-
-		$languagePointer = 'lDEF';
-		$valuePointer = 'vDEF';
 		$items = $params['items'];
-
-		if(is_array($items) && count($items) > 0) {
-			$rawFlex = $params['row']['pi_flexform'];
-			$flexFormArray = \TYPO3\CMS\Core\Utility\GeneralUtility::xml2array($rawFlex);
-			$slideTypeUid = $flexFormArray['data']['sDEF'][$languagePointer]['settings.slideType'][$valuePointer];
-
+        $slideTypeUid = $params['row']['settings.slideType'][0];
+		if($slideTypeUid && is_array($items) && count($items) > 0) {
 			// get all item UIDs
 			$itemUids = array();
 			foreach($items as $item) {
-				$itemUids[$item[1]] = $item[1];
+				$itemUids[$item[1]] = intval($item[1]);
 			}
 
 			// get allowed slides based on type
 			$select = 'S.uid';
-			$table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = '.$GLOBALS['TYPO3_DB']->quoteStr($slideTypeUid, 'tx_cicslide_domain_model_slide');
-			$where = 'S.hidden=0 AND S.deleted=0 AND S.uid IN ('.implode(',',$itemUids).') ' .
-				'OR (S.t3ver_oid IN ('.implode(',',$itemUids).') AND S.t3ver_wsid='.$GLOBALS['BE_USER']->workspace.')';
-			$qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
+            $table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = ' . intval($slideTypeUid);
+            $where = 'S.hidden=0 AND S.deleted=0 AND S.uid IN (' . implode(',', $itemUids) . ') ' .
+                'OR (S.t3ver_oid IN (' . implode(',', $itemUids) . ') AND S.t3ver_wsid=' . $GLOBALS['BE_USER']->workspace . ')';
+            $qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);
 			while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($qres)) {
 				$allowed[] = $row['uid'];
 			}
@@ -64,5 +61,3 @@ class FlexformItemsProc {
 		}
 	}
 }
-
-?>
