@@ -72,8 +72,7 @@ class SlideController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function showAction() {
         // if necessary, switch view based on slide type.
         if($this->settings['slideType']) {
-            $slideType = $this->slideTypeRepository->findByUid($this->settings['slideType']);
-            if ($slideType->getViewname()) {
+            if ($slideType = $this->slideTypeRepository->findByUid($this->settings['slideType']) && $slideType->getViewname()) {
                 $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
                 $path = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPath']).'/Slide/'.ucfirst($slideType->getViewname()).'.html';
                 if(file_exists($path)) {
