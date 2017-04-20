@@ -46,7 +46,7 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Slide.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
+		'iconfile' => 'EXT:cicslide/Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
 	),
 );
 
@@ -73,7 +73,7 @@ $TCA['tx_cicslide_domain_model_type'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Type.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_cicslide_domain_model_type.gif'
+		'iconfile' => 'EXT:cicslide/Resources/Public/Icons/tx_cicslide_domain_model_type.gif'
 	),
 );
 
