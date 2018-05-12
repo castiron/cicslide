@@ -239,7 +239,7 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$imagePaths = explode(',',$this->images);
 		$out = array();
 		foreach($imagePaths as $path) {
-			$o = $this->objectManager->create('CIC\Cicbase\Domain\Model\DigitalAsset');
+			$o = $this->objectManager->get('CIC\Cicbase\Domain\Model\DigitalAsset');
 			$o->setFileName($path);
 			$o->setFilePath('uploads/tx_cicslide/');
 			$out[] = $o;
