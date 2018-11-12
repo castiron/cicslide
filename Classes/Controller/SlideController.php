@@ -137,4 +137,3 @@ namespace CIC\Cicslide\Controller;
 		return $sortedSlides;
 	}
 }
-?>

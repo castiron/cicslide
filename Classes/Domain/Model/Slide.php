@@ -26,6 +26,8 @@ namespace CIC\Cicslide\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Core\Resource\FileRepository;
+
 
 /**
  *
@@ -38,9 +40,10 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * The DAM Repository
-	 * @var \CIC\Cicbase\Domain\Repository\DigitalAssetRepository
+	 * @var \TYPO3\CMS\Core\Resource\FileRepository
+	 * @inject
 	 */
-	protected $damRepository;
+	protected $fileRepository;
 
 	/**
 	 * Slide title.
@@ -226,15 +229,6 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $out;
 	}
 
-	/**
-	 * Sets the link
-	 *
-	 * @return void
-	 */
-	public function getDamImages() {
-		return $this->damRepository->get('tx_cicslide_domain_model_slide', $this->_localizedUid, 'images');
-	}
-
 	public function getUploadsImages() {
 		$imagePaths = explode(',',$this->images);
 		$out = array();
@@ -253,11 +247,7 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return array Collection of DAM objects.
 	 */
 	public function getImages() {
-		if ($this->damIsEnabled) {
-			return $this->getDamImages();
-		} else {
-			return $this->getUploadsImages();
-		}
+		return $this->fileRepository->findByRelation('tx_cicslide_domain_model_slide','images', $this->getUid());
 	}
 
 	/**
@@ -314,4 +304,3 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->addclass = $addclass;
 	}
 }
-?>

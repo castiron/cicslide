@@ -37,7 +37,7 @@ class FlexformItemsProc
 
         if (is_array($items) && count($items) > 0) {
             $flexFormArray = $params['row'];
-            $slideTypeUid = $flexFormArray['settings.slideType'][0];
+            $slideTypeUid = $flexFormArray['settings.slideType'][0] ?: '';
 
             // get all item UIDs
             $itemUids = [];
@@ -47,7 +47,7 @@ class FlexformItemsProc
 
             // get allowed slides based on type
             $select = 'S.uid';
-            $table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = ' . $GLOBALS['TYPO3_DB']->quoteStr($slideTypeUid, 'tx_cicslide_domain_model_slide');
+            $table = 'tx_cicslide_domain_model_slide S JOIN tx_cicslide_domain_model_type T on S.slidetype = T.uid AND T.uid = \'' . $GLOBALS['TYPO3_DB']->quoteStr($slideTypeUid, 'tx_cicslide_domain_model_slide').'\'';
             $where = 'S.hidden=0 AND S.deleted=0 AND S.uid IN (' . implode(',', $itemUids) . ') ' .
                 'OR (S.t3ver_oid IN (' . implode(',', $itemUids) . ') AND S.t3ver_wsid=' . $GLOBALS['BE_USER']->workspace . ')';
             $qres = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where);

@@ -1,9 +1,9 @@
 plugin.tx_cicslide {
 	vendorName = CIC
 	view {
-		templateRootPath = {$plugin.tx_cicslide.view.templateRootPath}
-		partialRootPath = {$plugin.tx_cicslide.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_cicslide.view.layoutRootPath}
+		templateRootPaths.10 = {$plugin.tx_cicslide.view.templateRootPath}
+		partialRootPaths.10 = {$plugin.tx_cicslide.view.partialRootPath}
+		layoutRootPaths.10 = {$plugin.tx_cicslide.view.layoutRootPath}
 	}
 	persistence {
 		storagePid = {$plugin.tx_cicslide.persistence.storagePid}
