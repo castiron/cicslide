@@ -1,10 +1,30 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+defined ('TYPO3_MODE') or die ('Access denied.');
 
-$TCA['tx_cicslide_domain_model_slide'] = array(
-	'ctrl' => $TCA['tx_cicslide_domain_model_slide']['ctrl'],
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_cicslide_domain_model_slide');
+
+$tx_cicslide_domain_model_slide = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:cicslide/Resources/Private/Language/locallang_db.xml:tx_cicslide_domain_model_slide',
+		'label' => 'title',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'dividers2tabs' => TRUE,
+		'versioningWS' => 2,
+		'versioning_followPages' => TRUE,
+		'origUid' => 't3_origuid',
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
+		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
+		),
+		'iconfile' => 'EXT:cicslide/Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
+	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, is_lightbox, link, description, class, images, html',
 	),
@@ -17,15 +37,15 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 	'columns' => array(
 		'sys_language_uid' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
+			'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.language',
 			'config' => array(
 				'type' => 'select',
                 'renderType' => 'selectSingle',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
 				'items' => array(
-					array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
+					array('LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages', -1),
+					array('Default', 0)
 				),
 			),
 		),
@@ -58,7 +78,7 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 		),
 		'hidden' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
+			'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
 			'config' => array(
 				'type' => 'check',
 			),
@@ -217,8 +237,10 @@ $TCA['tx_cicslide_domain_model_slide'] = array(
 	),
 );
 
-$TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] = $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] ? $TCA['tx_cicslide_domain_model_slide']['ctrl']['requestUpdate'] . ', is_lightbox' : 'is_lightbox';
+$tx_cicslide_domain_model_slide['ctrl']['requestUpdate'] = $tx_cicslide_domain_model_slide['ctrl']['requestUpdate'] ? $tx_cicslide_domain_model_slide['ctrl']['requestUpdate'] . ', is_lightbox' : 'is_lightbox';
 
 if ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cicslide']['useFal']) {
-    $TCA['tx_cicslide_domain_model_slide']['columns']['images']['config'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('images');
+    $tx_cicslide_domain_model_slide['columns']['images']['config'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('images');
 }
+
+return $tx_cicslide_domain_model_slide;
