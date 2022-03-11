@@ -107,6 +107,11 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $addclass;
 
+	/**
+	 * @var bool
+	 */
+	protected $showTextBg;
+
 	protected $damIsEnabled = false;
 
 	public function initializeObject() {
@@ -318,6 +323,21 @@ class Slide extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setAddclass($addclass) {
 		$this->addclass = $addclass;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function getShowTextBg() {
+		return $this->showTextBg;
+	}
+
+	/**
+	 * @param $showTextBg
+	 * @return void
+	 */
+	public function setShowTextBg($showTextBg) {
+		$this->showTextBg = $showTextBg;
 	}
 }
 ?>

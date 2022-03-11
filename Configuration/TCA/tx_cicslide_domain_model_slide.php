@@ -26,10 +26,10 @@ $tx_cicslide_domain_model_slide = array(
 		'iconfile' => 'EXT:cicslide/Resources/Public/Icons/tx_cicslide_domain_model_slide.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, is_lightbox, link, description, class, images, html',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slidetype, is_lightbox, link, description, show_text_bg, class, images, html',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, is_lightbox, lightbox_width, lightbox_height, link, description, addclass, images,html,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, slidetype, is_lightbox, lightbox_width, lightbox_height, link, description, show_text_bg, addclass, images,html,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -173,6 +173,13 @@ $tx_cicslide_domain_model_slide = array(
 				'cols' => 40,
 				'rows' => 5,
 				'eval' => 'trim'
+			),
+		),
+		'show_text_bg' => array(
+			'exclude' => 1,
+			'label' => 'Show text background',
+			'config' => array(
+				'type' => 'check',
 			),
 		),
 		'addclass' => array(
