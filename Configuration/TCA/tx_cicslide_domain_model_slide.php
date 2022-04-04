@@ -176,7 +176,7 @@ $tx_cicslide_domain_model_slide = array(
 			),
 		),
 		'show_text_bg' => array(
-			'exclude' => 1,
+			'exclude' => 0,
 			'label' => 'Show text background',
 			'config' => array(
 				'type' => 'check',
